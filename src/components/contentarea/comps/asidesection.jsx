@@ -1,7 +1,7 @@
 import React from "react";
 
 // Images
-import user from '../../../assets/user.jpg'
+import user from '../../../assets/user.png'
 
 const AsideSection = (props) => {
     return (

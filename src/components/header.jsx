@@ -5,7 +5,7 @@ import MyContext from '../context'
 
 // Images
 import logo from '../assets/logo.png'
-import user from '../assets/user.jpg'
+import user from '../assets/user.png'
 
 // Icons
 import all from '../assets/icons/all.svg'
@@ -24,7 +24,6 @@ const Header = () => {
     const searchRef = useRef(null)
 
     const handleInput = (e) => {
-        console.log('enter')
         if (e.key === 'Enter') {
             setSearch(searchRef.current.value)
         }

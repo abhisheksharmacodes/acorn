@@ -15,12 +15,13 @@ const ContentArea = () => {
   const [searchState] = useContext(MyContext)
   const { search, setSearch } = searchState
 
+  const [sort, setSort] = useState('hot')
   const [found, setFound] = useState(null)
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
     if (search) {
-      fetch(`https://www.reddit.com/search.json?q=${search}`).then(response => {
+      fetch(`https://www.reddit.com/search.json?q=${search}?limit=10`).then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -49,7 +50,7 @@ const ContentArea = () => {
         });
     }
 
-  }, [search])
+  }, [search, sort])
 
   return (
     <main className='flex justify-between w-full bg-gray-100 mx-2'>
@@ -82,7 +83,7 @@ const ContentArea = () => {
           </div>
             <div className="posts w-full flex gap-4 flex-col max-w-4xl">
               {posts.map((post, index) => (
-                <Post key={index} url={post.data.permalink} title={post.data.title} ups={post.data.ups} comments={post.data.num_comments} author={post.data.author} time={post.time} />
+                <Post key={index} url={post.data.permalink} title={post.data.title} ups={post.data.ups} comments={post.data.num_comments} author={post.data.author} time={post.data.created_utc} />
               ))}
             </div></> : `Couldn't find anything. Try something else.`}
         </div>
