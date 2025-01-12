@@ -1,4 +1,4 @@
-import React, { useContext, useState, useRef, useEffect } from 'react'
+import React, { useContext, useRef } from 'react'
 import '../App.css'
 
 import MyContext from '../context'
@@ -20,7 +20,6 @@ const Header = () => {
 
     const [searchState] = useContext(MyContext)
     const { setSearch } = searchState
-
     const searchRef = useRef(null)
 
     const handleInput = (e) => {
