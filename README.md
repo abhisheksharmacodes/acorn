@@ -1,9 +1,5 @@
 # Acorn Project
 
-## Overview
-
-This project is a React application that displays posts with various functionalities such as search, notifications, and more.
-
 ## File Structure
 
 ```
