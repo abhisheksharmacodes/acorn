@@ -9,7 +9,7 @@ import ContentArea from './components/contentarea/contentarea'
 
 const App = () => {
 
-  const [search, setSearch] = useState('gaming')
+  const [search, setSearch] = useState()
 
   return (
     <MyContext.Provider value={[{ search, setSearch }]}>

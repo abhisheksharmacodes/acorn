@@ -5,21 +5,17 @@ import user from '../../../assets/user.png'
 
 // Icons
 import more from '../../../assets/icons/more.svg'
-import notify from '../../../assets/icons/notify.svg'
+import notify from '../../../assets/icons/notify_gray.svg'
 import share from '../../../assets/icons/share.svg'
 import thumbnail from '../../../assets/thumbnail.jpg'
 
 const Post = props => {
 
     const utcToFormattedDate = utcTimestamp => {
-
         const date = new Date(utcTimestamp * 1000);
-
         const options = { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit' };
         const formattedDate = date.toLocaleString('en-US', options);
-
         return `${formattedDate}`;
-
     }
 
     const numberFormatter = num => {
@@ -52,12 +48,12 @@ const Post = props => {
                 <div className='w-40 flex justify-between flex-col py-0 mx-4'>
                     <div className='flex gap-2 text-sm'>
                         <img src={notify} className='small_icons' alt="notify" />
-                        <span>{numberFormatter(props.comments)}</span>
+                        <span className="text-gray-500">{numberFormatter(props.comments)}</span>
                         <span className="text-gray-500">Comments</span>
                     </div>
                     <div className='flex gap-2 text-sm text-gray-400'>
                         <img src={share} className='small_icons' alt="share" />
-                        <span>{Math.floor(Math.random() * (500 - 100 + 1)) + 100}</span>
+                        <span className="text-gray-500">{numberFormatter(Math.floor(Math.random() * (props.ups * .2 - 100 + 1)) + 100)}</span>
                         <span className="text-gray-500">Shares</span>
                     </div>
                     <div className='flex gap-2 text-sm text-gray-400'>
@@ -67,11 +63,11 @@ const Post = props => {
                 </div>
             </div>
             <div className='p-4 border-l border-gray-200 box-border flex gap-2 h-full flex-col'>
-                <div className='bg-[#ff410110] p-4 py-2 rounded-md cursor-pointer'>
+                <div className='bg-[#ff410110] hover:bg-[#ff410120] transition ease-in-out p-4 py-2 rounded-md cursor-pointer'>
                     <div className='border-2 m-auto translate-y-[2px] border-l-0 border-b-0 border-[#FF4201] h-[9px] aspect-square -rotate-45'></div>
                 </div>
                 <span className='text-sm'>{numberFormatter(props.ups)}</span>
-                <div className='bg-[#ff410110] p-5 py-2 rounded-md cursor-pointer'>
+                <div className='bg-[#ff410110] hover:bg-[#ff410120] transition ease-in-out p-5 py-2 rounded-md cursor-pointer'>
                     <div className='border-2 m-auto -translate-y-[2px] border-l-0 border-b-0 border-[#FF4201] h-[9px] aspect-square rotate-[135deg]'></div>
                 </div>
             </div>

@@ -18,8 +18,8 @@ import lens from '../assets/icons/search.svg'
 
 const Header = () => {
 
-    const [searchState, foundState] = useContext(MyContext)
-    const { search, setSearch } = searchState
+    const [searchState] = useContext(MyContext)
+    const { setSearch } = searchState
 
     const searchRef = useRef(null)
 

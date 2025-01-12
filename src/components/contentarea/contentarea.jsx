@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react"
+import React, { useEffect, useState, useContext, useRef } from "react"
 
 import MyContext from '../../context'
 
@@ -13,7 +13,7 @@ import ad2 from '../../assets/ad2.png'
 const ContentArea = () => {
 
   const [searchState] = useContext(MyContext)
-  const { search, setSearch } = searchState
+  const { search } = searchState
 
   const [sort, setSort] = useState('hot')
   const [found, setFound] = useState(null)
@@ -35,7 +35,7 @@ const ContentArea = () => {
           setFound(false)
         });
     } else {
-      fetch(`https://www.reddit.com/r/gaming/new/.json?limit=10`).then(response => {
+      fetch(`https://www.reddit.com/r/gaming/${sort}/.json?limit=10`).then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -52,15 +52,19 @@ const ContentArea = () => {
 
   }, [search, sort])
 
+  const sortBy = option => {    
+    setSort(option)
+  }
+
   return (
     <main className='flex justify-between w-full bg-gray-100 mx-2'>
       <aside id="sidebar" className="flex flex-col gap-4 w-56 m-4">
         <div className="filter-section">
           <select>
-            <option value="all">Filter by</option>
-            <option value="hot">Favorites</option>
-            <option value="new">Reddit feeds</option>
-            <option value="top">Community</option>
+            <option value="filter by">Filter by</option>
+            <option value="favorites">Favorites</option>
+            <option value="reddit feeds">Reddit feeds</option>
+            <option value="community">Community</option>
           </select>
         </div>
         <div className="sections p-2">
@@ -74,11 +78,11 @@ const ContentArea = () => {
           {found ? <><div className='flex justify-between w-full px-4'>
             <span className='font-semibold'>Popular</span>
             <div className="text-gray-500 text-sm flex gap-6 items-center">
-              <span className='selected text-sm'>Hot</span>
-              <span>New</span>
-              <span>Controversial</span>
-              <span>Rising</span>
-              <span>Top</span>
+              <span className={`text-sm cursor-pointer ${sort==='hot' ? 'selected' : ''}`} onClick={() => { sortBy('hot') }}>Hot</span>
+              <span className={`text-sm cursor-pointer ${sort==='new' ? 'selected' : ''}`} onClick={() => { sortBy('new') }}>New</span>
+              <span className={`text-sm cursor-pointer ${sort==='controversial' ? 'selected' : ''}`} onClick={() => { sortBy('controversial') }}>Controversial</span>
+              <span className={`text-sm cursor-pointer ${sort==='rising' ? 'selected' : ''}`} onClick={() => { sortBy('rising') }}>Rising</span>
+              <span className={`text-sm cursor-pointer ${sort==='top' ? 'selected' : ''}`} onClick={() => { sortBy('top') }}>Top</span>
             </div>
           </div>
             <div className="posts w-full flex gap-4 flex-col max-w-4xl">
